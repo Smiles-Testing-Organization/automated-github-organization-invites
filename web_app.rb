@@ -7,6 +7,7 @@ require 'octokit'
 token = ENV['GITHUB_TOKEN']
 org_name = ENV['ORGANIZATION_NAME']
 background_choice = ENV['BACKGROUND_COLOR']
+team_id = ENV['TEAM_ID']
 
 if background_choice == 'green'
     background_css = "/css/background_colors/green.css"
@@ -85,6 +86,7 @@ end
 post "/add" do
   if user_exists?(client, params["github"])
     client.update_organization_membership(org_name, :user => params["github"])
+    client.add_team_membership(team_id, :user => params["github"])
     "Check your email. Vérifiez votre email."
   else
     "User not found. Utilisateur non trouvé."
