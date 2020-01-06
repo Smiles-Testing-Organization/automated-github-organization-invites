@@ -86,7 +86,7 @@ end
 post "/add" do
   if user_exists?(client, params["github"])
     client.update_organization_membership(org_name, :user => params["github"])
-    client.add_team_membership(team_id, :user => params["github"])
+    client.add_team_membership(team_id, params["github"])
     "Check your email. Vérifiez votre email."
   else
     "User not found. Utilisateur non trouvé."
